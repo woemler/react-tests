@@ -22,6 +22,7 @@
         <!-- Test 1 -->
         <div class="col-xs-12">
             <h3>Test 1</h3>
+            <p>Rendering elements with ReactDOM</p>
             <div id="test-1"></div>
         </div>
 
@@ -39,6 +40,7 @@
         <!-- Test 2 -->
         <div class="col-xs-12">
             <h3>Test 2</h3>
+            <p>Passing data into React elements</p>
             <div id="test-2"></div>
         </div>
 
@@ -65,6 +67,220 @@
           );
 
         </script> <!-- /Test 2 -->
+
+        <div class="col-xs-12"><hr></div>
+
+        <!-- Test 3 -->
+        <div class="col-xs-12">
+            <h3>Test 3</h3>
+            <p>Creating an element and updating it with <code>setInterval</code></p>
+            <div id="test-3"></div>
+        </div>
+
+        <script type="text/babel">
+
+          function tick() {
+            const element = (
+              <h4>The time is now {new Date().toLocaleTimeString()}</h4>
+            );
+            ReactDOM.render(
+                element,
+                document.getElementById("test-3")
+            );
+          }
+
+          setInterval(tick, 1000)
+
+        </script> <!-- /Test 3 -->
+
+        <div class="col-xs-12"><hr></div>
+
+        <!-- Test 4 -->
+        <div class="col-xs-12">
+            <h3>Test 4</h3>
+            <p>Creating reusable tags with functions</p>
+            <div id="test-4"></div>
+        </div>
+
+        <script type="text/babel">
+
+          function Welcome(props) {
+            return <h4>Welcome, {props.name}</h4>;
+          }
+
+          const element = <Welcome name="Will"/>;
+
+          ReactDOM.render(
+              element,
+              document.getElementById("test-4")
+          );
+
+        </script> <!-- /Test 4 -->
+
+        <div class="col-xs-12"><hr></div>
+
+        <!-- Test 5 -->
+        <div class="col-xs-12">
+            <h3>Test 5</h3>
+            <p>Rendering multiple custom tags with a single function</p>
+            <div id="test-5"></div>
+        </div>
+
+        <script type="text/babel">
+
+            function Welcome(props) {
+              return <h4>Welcome, {props.name}</h4>;
+            }
+
+            function App(){
+              return (
+                  <div>
+                  <Welcome name="Will"/>
+                  <Welcome name="Karen"/>
+                  <Welcome name="June"/>
+                  </div>
+              ); // The returned elements must be a single object, that's why it is wrapped in a div
+            }
+
+            ReactDOM.render(
+              <App />,
+              document.getElementById("test-5")
+            );
+
+        </script> <!-- /Test 5 -->
+
+        <div class="col-xs-12"><hr></div>
+
+        <!-- Test 6 -->
+        <div class="col-xs-12">
+            <h3>Test 6</h3>
+            <p>Creating component classes</p>
+            <div id="test-6"></div>
+        </div>
+
+        <script type="text/babel">
+
+            class Clock extends React.Component {
+
+              constructor(props){
+                super(props);
+                this.state = {date: new Date()};
+              }
+
+              render(){
+                  return (
+                      <div>
+                          <h4>Hello, World</h4>
+                          <p>It is {this.state.date.toLocaleTimeString()}</p>
+                      </div>
+                  )
+              }
+
+            }
+
+            ReactDOM.render(
+                <Clock />,
+                document.getElementById("test-6")
+            );
+
+
+        </script> <!-- /Test 6 -->
+
+        <div class="col-xs-12"><hr></div>
+
+        <!-- Test 7 -->
+        <div class="col-xs-12">
+            <h3>Test 7</h3>
+            <p>Adding lifecycle events to component classes</p>
+            <div id="test-7"></div>
+        </div>
+
+        <script type="text/babel">
+
+          class Clock extends React.Component {
+
+            constructor(props){
+              super(props);
+              this.state = {date: new Date()};
+            }
+
+            render(){
+              return (
+                  <div>
+                      <h4>Hello, World</h4>
+                      <p>It is {this.state.date.toLocaleTimeString()}</p>
+                  </div>
+              )
+            }
+
+            // runs after render() method
+            componentDidMount(){
+                this.timerID = setInterval(
+                    () => this.tick(),
+                    1000
+                );
+            }
+
+            componentWillUnmount(){
+                clearInterval(this.timerID);
+            }
+
+            tick(){
+                this.setState({
+                  date: new Date()
+                });
+            }
+
+          }
+
+          ReactDOM.render(
+              <Clock />,
+              document.getElementById("test-7")
+          );
+
+        </script> <!-- /Test 7 -->
+
+        <div class="col-xs-12"><hr></div>
+
+        <!-- Test 8 -->
+        <div class="col-xs-12">
+            <h3>Test 8</h3>
+            <p>Event handling and accessing previous state.</p>
+            <div id="test-8"></div>
+        </div>
+
+        <script type="text/babel">
+
+          class Toggle extends React.Component {
+
+            constructor(props){
+              super(props);
+              this.state = {isToggleOn: true};
+              this.handleClick = this.handleClick.bind(this);
+            }
+
+            render(){
+                return (
+                    <button onClick={this.handleClick}>
+                      {this.state.isToggleOn ? "ON" : "OFF"}
+                    </button>
+                );
+            }
+
+            handleClick(){
+              this.setState(prevState => ({
+                isToggleOn: !prevState.isToggleOn
+              }));
+            }
+
+          }
+
+          ReactDOM.render(
+              <Toggle />,
+              document.getElementById("test-8")
+          );
+
+        </script> <!-- /Test 8 -->
 
         <div class="col-xs-12"><hr></div>
 
