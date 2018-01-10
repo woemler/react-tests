@@ -284,6 +284,96 @@
 
         <div class="col-xs-12"><hr></div>
 
+        <!-- Test 9 -->
+        <div class="col-xs-12">
+            <h3>Test 9</h3>
+            <p>Conditional rendering</p>
+            <div id="test-9"></div>
+        </div>
+
+        <script type="text/babel">
+
+            function UserGreeting(props){
+              return <h3>Welcome Back!</h3>;
+            }
+
+            function GuestGreeting(props){
+              return <h3>Please Log In</h3>;
+            }
+
+            function Greeting(props){
+              const isLoggedIn = props.isLoggedIn;
+              if (isLoggedIn){
+                return <UserGreeting/>
+              } else {
+                return <GuestGreeting/>
+              }
+            }
+
+            function LoginButton(props){
+              return (
+                  <button onClick={props.onClick}>
+                      Login
+                  </button>
+              )
+            }
+
+            function LogoutButton(props){
+              return (
+                  <button onClick={props.onClick}>
+                      Logout
+                  </button>
+              )
+            }
+
+            class LoginControl extends React.Component {
+
+              constructor(props){
+                super(props);
+                this.state = { isLoggedIn: false };
+                this.handleLoginClick = this.handleLoginClick.bind(this);
+                this.handleLogOutClick = this.handleLogOutClick.bind(this);
+              }
+
+              handleLoginClick(){
+                this.setState({
+                    isLoggedIn: true
+                });
+              }
+
+              handleLogOutClick(){
+                this.setState({
+                  isLoggedIn: false
+                });
+              }
+
+              render(){
+                const isLoggedIn = this.state.isLoggedIn;
+                let button = null;
+                if (isLoggedIn){
+                  button = <LogoutButton onClick={this.handleLogOutClick} />;
+                } else {
+                  button = <LoginButton onClick={this.handleLoginClick}/>
+                }
+                return (
+                    <div>
+                        <Greeting isLoggedIn={isLoggedIn}/>
+                        {button}
+                    </div>
+                );
+              }
+
+            }
+
+            ReactDOM.render(
+                <LoginControl/>,
+                document.getElementById("test-9")
+            );
+
+        </script> <!-- /Test 9 -->
+
+        <div class="col-xs-12"><hr></div>
+
     </div>
 
 
