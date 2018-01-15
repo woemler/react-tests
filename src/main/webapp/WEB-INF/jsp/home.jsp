@@ -374,6 +374,87 @@
 
         <div class="col-xs-12"><hr></div>
 
+        <!-- Test 10 -->
+        <div class="col-xs-12">
+            <h3>Test 10</h3>
+            <p>Lists and Maps</p>
+            <div id="test-10"></div>
+        </div>
+
+        <script type="text/babel">
+
+            const numbers = [2,4,6,8,10];
+            const listItems = numbers.map((number) =>
+                    <li>{number}</li>
+            );
+
+            ReactDOM.render(
+                <ul>{listItems}</ul>,
+                document.getElementById("test-10")
+            );
+
+        </script>
+
+        <div class="col-xs-12">
+
+            <div id="test-10-b"></div>
+
+            <script type="text/babel">
+
+                function NumberList(props){
+                  const numbers = props.numbers;
+                  const listItems = numbers.map((number) =>
+                          <li key={number.toString()} >
+                            {number}
+                          </li>
+                  );
+                  return (
+                          <ul>{listItems}</ul>
+                  );
+                }
+
+                const numbers = [2,4,6,8,10];
+                ReactDOM.render(
+                    <NumberList numbers={numbers}/>,
+                    document.getElementById("test-10-b")
+                );
+
+            </script>
+
+        </div>
+
+        <div class="col-xs-12">
+
+            <div id="test-10-c"></div>
+
+            <script type="text/babel">
+
+              function GeneList(props){
+                const genes = props.genes;
+                const listItems = genes.map((gene) =>
+                        <li key={gene.id} >
+                          {gene.symbol}
+                        </li>
+                );
+                return (
+                        <ul>{listItems}</ul>
+                );
+              }
+
+              const genes = [
+                {id: "1", symbol: "AKT1"},
+                {id: "2", symbol: "AKT2"},
+                {id: "3", symbol: "AKT3"}
+              ];
+              ReactDOM.render(
+                  <GeneList genes={genes}/>,
+                  document.getElementById("test-10-c")
+              );
+
+            </script>
+
+        </div>
+
     </div>
 
 
