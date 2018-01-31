@@ -446,6 +446,7 @@
                 {id: "2", symbol: "AKT2"},
                 {id: "3", symbol: "AKT3"}
               ];
+
               ReactDOM.render(
                   <GeneList genes={genes}/>,
                   document.getElementById("test-10-c")
@@ -454,6 +455,59 @@
             </script>
 
         </div>
+
+        <div class="col-xs-12"><hr></div>
+
+        <!-- Test 11 -->
+        <div class="col-xs-12">
+            <h3>Test 11</h3>
+            <p>Forms</p>
+            <div id="test-11"></div>
+        </div>
+
+        <script type="text/babel">
+
+          class NameForm extends React.Component {
+
+            constructor(props){
+                super(props);
+                this.state = { value: "" };
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event){
+                this.setState({value: event.target.value});
+            }
+
+            handleSubmit(event){
+                alert("A name was submitted: " + event.state.value);
+                event.preventDefault();
+            }
+
+            render(){
+
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Name:
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                );
+
+            }
+
+          }
+
+          ReactDOM.render(
+            <NameForm/>,
+            document.getElementById("test-11")
+          );
+
+        </script> <!-- /Test 11 -->
+
 
     </div>
 
